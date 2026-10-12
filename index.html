@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Prince Capture · Premium Camera</title>
+  <!-- Font & icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ----- CSS RESET & GLOBAL ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at 30% 10%, #1e1e1e, #0b0b0b 90%);
+      color: #f0e9dd;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.2rem 1rem 2rem;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ----- SOFT UI / GLASS VARIABLES ----- */
+    :root {
+      --gold: #d4af37;
+      --gold-soft: #e9d29b;
+      --gold-glow: rgba(212, 175, 55, 0.2);
+      --glass-bg: rgba(20, 20, 20, 0.55);
+      --glass-border: rgba(212, 175, 55, 0.2);
+      --glass-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(212, 175, 55, 0.1) inset;
+      --card-radius: 2rem;
+      --btn-radius: 3rem;
+      --transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1);
+    }
+
+    /* ----- TYPOGRAPHY ----- */
+    h1, h2, h3 {
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      background: linear-gradient(135deg, #f5e7c8, var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.3rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: #f5e7c8;
+      margin-bottom: 0.5rem;
+    }
+
+    .subhead {
+      font-size: 1.1rem;
+      color: #bcb1a0;
+      font-weight: 400;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    /* ----- LAYOUT CONTAINERS ----- */
+    .app-container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ----- GLASS CARDS ----- */
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: var(--card-radius);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      padding: 1.8rem;
+      transition: var(--transition);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(212, 175, 55, 0.4);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(212, 175, 55, 0.3) inset;
+    }
+
+    /* ----- BUTTONS (Soft UI) ----- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.9rem 1.8rem;
+      border-radius: var(--btn-radius);
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      background: rgba(30, 30, 30, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #f0e9dd;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(212, 175, 55, 0.2) inset;
+      text-decoration: none;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .btn i {
+      font-size: 1.1rem;
+      color: var(--gold);
+    }
+
+    .btn:hover {
+      background: rgba(45, 45, 45, 0.95);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(212, 175, 55, 0.5) inset;
+      transform: translateY(-2px);
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(212, 175, 55, 0.6) inset;
+    }
+
+    .btn-gold {
+      background: linear-gradient(145deg, #1f1a0e, #2f2818);
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      color: #f5e7c8;
+    }
+
+    .btn-gold i {
+      color: #f5e7c8;
+    }
+
+    .btn-gold:hover {
+      background: linear-gradient(145deg, #2f2818, #3f3520);
+      border-color: var(--gold);
+    }
+
+    .btn-small {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.85rem;
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    /* ----- HOME PAGE CARDS GRID ----- */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 2rem 0 2.5rem;
+    }
+
+    @media (max-width: 700px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+    }
+
+    .capture-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 2rem 1.5rem;
+    }
+
+    .capture-card i {
+      font-size: 3rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.4));
+    }
+
+    .capture-card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 0.8rem;
+      color: #f5e7c8;
+    }
+
+    .capture-card p {
+      color: #bcb1a0;
+      margin-bottom: 1.8rem;
+      font-size: 0.95rem;
+      flex: 1;
+    }
+
+    /* ----- LINK GENERATOR SECTION ----- */
+    .link-section {
+      margin-top: 2.5rem;
+      padding: 1.8rem;
+    }
+
+    .link-section h3 {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 1.4rem;
+      color: #f5e7c8;
+      margin-bottom: 1.8rem;
+    }
+
+    .link-section h3 i {
+      color: var(--gold);
+    }
+
+    .link-generator-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+      align-items: center;
+    }
+
+    .link-generator-row .btn {
+      flex: 1 0 auto;
+    }
+
+    .generated-link-area {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-top: 0.8rem;
+    }
+
+    .link-display {
+      display: flex;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 3rem;
+      padding: 0.3rem 0.3rem 0.3rem 1.5rem;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      font-size: 0.9rem;
+      word-break: break-all;
+      gap: 0.8rem;
+    }
+
+    .link-display span {
+      flex: 1;
+      color: #d4c9b8;
+      font-family: monospace;
+      font-size: 0.85rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .link-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    /* ----- TOAST ----- */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(20, 20, 20, 0.95);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--gold);
+      color: #f5e7c8;
+      padding: 0.8rem 1.8rem;
+      border-radius: 3rem;
+      font-weight: 500;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 0 1px rgba(212,175,55,0.3) inset;
+      transition: transform 0.3s ease;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      max-width: 90vw;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* ----- PRIVACY FOOTER ----- */
+    .privacy-footer {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #8a7e6e;
+      border-top: 1px solid rgba(212, 175, 55, 0.15);
+      padding-top: 1.8rem;
+    }
+
+    .privacy-footer i {
+      color: var(--gold);
+      margin-right: 0.3rem;
+    }
+
+    /* ----- CAMERA INTERFACE (shared) ----- */
+    .camera-view {
+      width: 100%;
+      border-radius: 2rem;
+      overflow: hidden;
+      background: #0a0a0a;
+      margin: 1.5rem 0;
+      position: relative;
+      aspect-ratio: 16 / 9;
+      border: 1px solid rgba(212, 175, 55, 0.25);
+    }
+
+    .camera-view video, .camera-view canvas, .camera-view img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .video-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      justify-content: center;
+      margin-top: 1.2rem;
+    }
+
+    .recording-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(200, 40, 40, 0.85);
+      padding: 0.4rem 1.2rem;
+      border-radius: 3rem;
+      color: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 20px rgba(255, 60, 60, 0.5);
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      z-index: 10;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.8; }
+      50% { opacity: 1; }
+      100% { opacity: 0.8; }
+    }
+
+    .elapsed-time {
+      background: rgba(0,0,0,0.7);
+      padding: 0.3rem 1rem;
+      border-radius: 3rem;
+      font-family: monospace;
+      font-size: 1rem;
+      color: #f5e7c8;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 10;
+      border: 1px solid rgba(212,175,55,0.4);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .preview-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    /* session badge */
+    .session-badge {
+      display: inline-block;
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      padding: 0.3rem 1rem;
+      border-radius: 3rem;
+      font-size: 0.8rem;
+      color: #d4c9b8;
+      margin-bottom: 0.5rem;
+      word-break: break-all;
+    }
+
+    /* responsive tweaks */
+    @media (max-width: 480px) {
+      h1 { font-size: 2.2rem; }
+      .btn { padding: 0.8rem 1.2rem; font-size: 0.9rem; }
+      .glass-card { padding: 1.5rem; }
+      .link-display { flex-direction: column; align-items: stretch; padding: 1rem; border-radius: 1.5rem; }
+      .link-actions { justify-content: center; }
+    }
+
+    /* permission notice */
+    .permission-notice {
+      background: rgba(212, 175, 55, 0.1);
+      border-left: 4px solid var(--gold);
+      padding: 1rem 1.2rem;
+      border-radius: 1rem;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      color: #e0d6c5;
+    }
+
+    .permission-notice i {
+      color: var(--gold);
+      margin-right: 0.5rem;
+    }
+
+    /* error message */
+    .error-msg {
+      background: rgba(220, 60, 60, 0.15);
+      border: 1px solid rgba(220, 60, 60, 0.4);
+      color: #ffb3b3;
+      padding: 0.8rem 1.2rem;
+      border-radius: 1rem;
+      font-size: 0.9rem;
+      margin: 0.8rem 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container" id="app">
+    <!-- ========== HOME PAGE ========== -->
+    <div id="homePage">
+      <div style="text-align: center; margin-bottom: 0.5rem;">
+        <i class="fas fa-camera-retro" style="font-size: 3.5rem; color: var(--gold); filter: drop-shadow(0 0 20px rgba(212,175,55,0.5));"></i>
+      </div>
+      <h1 style="text-align: center;">Prince Capture</h1>
+      <p class="subhead">Capture Moments. Share Responsibly.</p>
+
+      <!-- Two main cards -->
+      <div class="cards-grid">
+        <div class="glass-card capture-card">
+          <i class="fas fa-camera"></i>
+          <h3>Image Capture</h3>
+          <p>Open your camera, capture a photo with permission, and save it to your device.</p>
+          <button class="btn btn-gold" id="openImageCaptureBtn"><i class="fas fa-camera"></i> Open Image Capture</button>
+        </div>
+        <div class="glass-card capture-card">
+          <i class="fas fa-video"></i>
+          <h3>Video Recording</h3>
+          <p>Record a video after granting camera and microphone permission.</p>
+          <button class="btn btn-gold" id="openVideoCaptureBtn"><i class="fas fa-video"></i> Open Video Recording</button>
+        </div>
+      </div>
+
+      <!-- Link Generator Dashboard -->
+      <div class="glass-card link-section">
+        <h3><i class="fas fa-link"></i> Unique Link Generator</h3>
+        <div class="link-generator-row">
+          <button class="btn" id="genImageLinkBtn"><i class="fas fa-image"></i> Generate Image Link</button>
+          <button class="btn" id="genVideoLinkBtn"><i class="fas fa-film"></i> Generate Video Link</button>
+        </div>
+        <div class="generated-link-area" id="linkArea" style="display: none;">
+          <div class="link-display">
+            <span id="generatedLinkText">https://example.github.io/?mode=image&session=...</span>
+            <div class="link-actions">
+              <button class="btn btn-small" id="copyLinkBtn"><i class="fas fa-copy"></i> Copy</button>
+              <button class="btn btn-small" id="shareLinkBtn"><i class="fas fa-share-alt"></i> Share</button>
+            </div>
+          </div>
+        </div>
+        <p style="font-size: 0.8rem; color: #8a7e6e; margin-top: 1.2rem;">
+          <i class="fas fa-info-circle"></i> Each link contains a unique session ID. Browser-local storage keeps media private to your device. Cross-device transfer requires a configured backend.
+        </p>
+      </div>
+
+      <!-- Privacy Notice -->
+      <div class="privacy-footer">
+        <p><i class="fas fa-shield-alt"></i> Camera & microphone access are controlled by your browser. We never capture or upload without your explicit action.</p>
+        <p style="margin-top: 0.5rem;">© Prince Capture · Built with privacy first</p>
+      </div>
+    </div>
+
+    <!-- ========== IMAGE CAPTURE PAGE ========== -->
+    <div id="imageCapturePage" class="hidden">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+        <div>
+          <i class="fas fa-camera-retro" style="color: var(--gold); font-size: 2rem;"></i>
+          <h2 style="display: inline-block; margin-left: 0.6rem;">Image Capture</h2>
+        </div>
+        <button class="btn btn-small" id="backFromImageBtn"><i class="fas fa-arrow-left"></i> Home</button>
+      </div>
+
+      <div class="glass-card" style="padding: 1.5rem;">
+        <div id="imageSessionInfo" class="session-badge"></div>
+        <!-- Permission explanation -->
+        <div class="permission-notice" id="imagePermissionNotice">
+          <i class="fas fa-lock"></i> We need camera permission to show a live preview. Press <strong>Start Camera</strong> to continue. You control capture and download.
+        </div>
+
+        <!-- Error area -->
+        <div id="imageError" class="error-msg hidden"></div>
+
+        <!-- Camera preview + captured image -->
+        <div class="camera-view" id="imagePreviewContainer">
+          <video id="imageVideo" autoplay playsinline muted class="hidden"></video>
+          <img id="capturedImage" class="hidden" alt="Captured photo">
+          <canvas id="captureCanvas" class="hidden"></canvas>
+        </div>
+
+        <!-- Controls -->
+        <div class="video-controls" id="imageControls">
+          <button class="btn btn-gold" id="startImageCamBtn"><i class="fas fa-play"></i> Start Camera</button>
+          <button class="btn hidden" id="capturePhotoBtn"><i class="fas fa-camera"></i> Capture Photo</button>
+          <button class="btn hidden" id="switchCameraBtn"><i class="fas fa-sync-alt"></i> Switch</button>
+          <button class="btn hidden" id="stopImageCamBtn"><i class="fas fa-stop"></i> Stop Camera</button>
+        </div>
+
+        <!-- Post-capture actions -->
+        <div class="preview-actions hidden" id="imagePostActions">
+          <button class="btn" id="retakePhotoBtn"><i class="fas fa-undo-alt"></i> Retake</button>
+          <button class="btn btn-gold" id="downloadPhotoBtn"><i class="fas fa-download"></i> Download</button>
+          <button class="btn" id="deletePhotoBtn"><i class="fas fa-trash-alt"></i> Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== VIDEO RECORDING PAGE ========== -->
+    <div id="videoCapturePage" class="hidden">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+        <div>
+          <i class="fas fa-video" style="color: var(--gold); font-size: 2rem;"></i>
+          <h2 style="display: inline-block; margin-left: 0.6rem;">Video Recording</h2>
+        </div>
+        <button class="btn btn-small" id="backFromVideoBtn"><i class="fas fa-arrow-left"></i> Home</button>
+      </div>
+
+      <div class="glass-card" style="padding: 1.5rem;">
+        <div id="videoSessionInfo" class="session-badge"></div>
+        <div class="permission-notice" id="videoPermissionNotice">
+          <i class="fas fa-lock"></i> We need camera and microphone permission. Press <strong>Start Camera</strong> to continue.
+        </div>
+
+        <div id="videoError" class="error-msg hidden"></div>
+
+        <div class="camera-view" id="videoPreviewContainer" style="position: relative;">
+          <video id="videoPreview" autoplay playsinline muted class="hidden"></video>
+          <video id="recordedPlayback" controls class="hidden" style="width:100%; height:100%; object-fit:contain;"></video>
+          <div id="recordingIndicator" class="recording-indicator hidden">
+            <i class="fas fa-circle" style="font-size: 0.6rem;"></i> REC
+          </div>
+          <div id="elapsedTime" class="elapsed-time hidden">00:00</div>
+        </div>
+
+        <div class="video-controls" id="videoControls">
+          <button class="btn btn-gold" id="startVideoCamBtn"><i class="fas fa-play"></i> Start Camera</button>
+          <button class="btn hidden" id="startRecordingBtn"><i class="fas fa-circle"></i> Start Recording</button>
+          <button class="btn hidden" id="stopRecordingBtn"><i class="fas fa-stop"></i> Stop Recording</button>
+          <button class="btn hidden" id="stopVideoCamBtn"><i class="fas fa-stop"></i> Stop Camera</button>
+        </div>
+
+        <div class="preview-actions hidden" id="videoPostActions">
+          <button class="btn" id="recordAgainBtn"><i class="fas fa-redo-alt"></i> Record Again</button>
+          <button class="btn btn-gold" id="downloadVideoBtn"><i class="fas fa-download"></i> Download</button>
+          <button class="btn" id="deleteVideoBtn"><i class="fas fa-trash-alt"></i> Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast">Link copied!</div>
+
+  <script>
+    (function() {
+      "use strict";
+
+      // ---------- DOM references ----------
+      const homePage = document.getElementById('homePage');
+      const imageCapturePage = document.getElementById('imageCapturePage');
+      const videoCapturePage = document.getElementById('videoCapturePage');
+      const toastEl = document.getElementById('toast');
+
+      // Buttons
+      const openImageCaptureBtn = document.getElementById('openImageCaptureBtn');
+      const openVideoCaptureBtn = document.getElementById('openVideoCaptureBtn');
+      const backFromImageBtn = document.getElementById('backFromImageBtn');
+      const backFromVideoBtn = document.getElementById('backFromVideoBtn');
+
+      // Link generator
+      const genImageLinkBtn = document.getElementById('genImageLinkBtn');
+      const genVideoLinkBtn = document.getElementById('genVideoLinkBtn');
+      const linkArea = document.getElementById('linkArea');
+      const generatedLinkText = document.getElementById('generatedLinkText');
+      const copyLinkBtn = document.getElementById('copyLinkBtn');
+      const shareLinkBtn = document.getElementById('shareLinkBtn');
+
+      // Image capture elements
+      const imageVideo = document.getElementById('imageVideo');
+      const capturedImage = document.getElementById('capturedImage');
+      const captureCanvas = document.getElementById('captureCanvas');
+      const startImageCamBtn = document.getElementById('startImageCamBtn');
+      const capturePhotoBtn = document.getElementById('capturePhotoBtn');
+      const switchCameraBtn = document.getElementById('switchCameraBtn');
+      const stopImageCamBtn = document.getElementById('stopImageCamBtn');
+      const imagePostActions = document.getElementById('imagePostActions');
+      const retakePhotoBtn = document.getElementById('retakePhotoBtn');
+      const downloadPhotoBtn = document.getElementById('downloadPhotoBtn');
+      const deletePhotoBtn = document.getElementById('deletePhotoBtn');
+      const imageError = document.getElementById('imageError');
+      const imageSessionInfo = document.getElementById('imageSessionInfo');
+
+      // Video capture elements
+      const videoPreview = document.getElementById('videoPreview');
+      const recordedPlayback = document.getElementById('recordedPlayback');
+      const recordingIndicator = document.getElementById('recordingIndicator');
+      const elapsedTimeEl = document.getElementById('elapsedTime');
+      const startVideoCamBtn = document.getElementById('startVideoCamBtn');
+      const startRecordingBtn = document.getElementById('startRecordingBtn');
+      const stopRecordingBtn = document.getElementById('stopRecordingBtn');
+      const stopVideoCamBtn = document.getElementById('stopVideoCamBtn');
+      const videoPostActions = document.getElementById('videoPostActions');
+      const recordAgainBtn = document.getElementById('recordAgainBtn');
+      const downloadVideoBtn = document.getElementById('downloadVideoBtn');
+      const deleteVideoBtn = document.getElementById('deleteVideoBtn');
+      const videoError = document.getElementById('videoError');
+      const videoSessionInfo = document.getElementById('videoSessionInfo');
+
+      // ---------- Global state ----------
+      let imageStream = null;
+      let videoStream = null;
+      let mediaRecorder = null;
+      let recordedChunks = [];
+      let recordedBlob = null;
+      let recordingTimer = null;
+      let recordingSeconds = 0;
+      let currentFacingMode = 'environment'; // for image switch
+      let currentSessionId = null;
+      let currentMode = null;
+
+      // ---------- Utility: toast ----------
+      function showToast(msg) {
+        toastEl.textContent = msg;
+        toastEl.classList.add('show');
+        setTimeout(() => toastEl.classList.remove('show'), 2500);
+      }
+
+      // ---------- Session / URL helpers ----------
+      function generateSessionId() {
+        if (crypto && crypto.randomUUID) {
+          return crypto.randomUUID();
+        }
+        // fallback
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+          const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+          return v.toString(16);
+        });
+      }
+
+      function getBaseUrl() {
+        // works for GitHub Pages subpath
+        const loc = window.location;
+        return loc.origin + loc.pathname;
+      }
+
+      function buildShareableLink(mode, sessionId) {
+        const base = getBaseUrl();
+        const url = new URL(base);
+        url.searchParams.set('mode', mode);
+        url.searchParams.set('session', sessionId);
+        return url.toString();
+      }
+
+      // ---------- Stop all tracks ----------
+      function stopStream(stream) {
+        if (stream) {
+          stream.getTracks().forEach(track => track.stop());
+        }
+      }
+
+      function stopImageStream() {
+        stopStream(imageStream);
+        imageStream = null;
+      }
+
+      function stopVideoStream() {
+        stopStream(videoStream);
+        videoStream = null;
+      }
+
+      // ---------- Navigation ----------
+      function showHome() {
+        homePage.classList.remove('hidden');
+        imageCapturePage.classList.add('hidden');
+        videoCapturePage.classList.add('hidden');
+        stopImageStream();
+        stopVideoStream();
+        if (mediaRecorder && mediaRecorder.state === 'recording') {
+          mediaRecorder.stop();
+        }
+        // Clear UI states
+        imageVideo.classList.add('hidden');
+        capturedImage.classList.add('hidden');
+        captureCanvas.classList.add('hidden');
+        startImageCamBtn.classList.remove('hidden');
+        capturePhotoBtn.classList.add('hidden');
+        switchCameraBtn.classList.add('hidden');
+        stopImageCamBtn.classList.add('hidden');
+        imagePostActions.classList.add('hidden');
+        imageError.classList.add('hidden');
+
+        videoPreview.classList.add('hidden');
+        recordedPlayback.classList.add('hidden');
+        recordingIndicator.classList.add('hidden');
+        elapsedTimeEl.classList.add('hidden');
+        startVideoCamBtn.classList.remove('hidden');
+        startRecordingBtn.classList.add('hidden');
+        stopRecordingBtn.classList.add('hidden');
+        stopVideoCamBtn.classList.add('hidden');
+        videoPostActions.classList.add('hidden');
+        videoError.classList.add('hidden');
+        if (recordingTimer) clearInterval(recordingTimer);
+      }
+
+      function showImageCapture(sessionId) {
+        homePage.classList.add('hidden');
+        videoCapturePage.classList.add('hidden');
+        imageCapturePage.classList.remove('hidden');
+        currentMode = 'image';
+        currentSessionId = sessionId || generateSessionId();
+        imageSessionInfo.textContent = `Session: ${currentSessionId.slice(0, 13)}…`;
+        // reset UI
+        startImageCamBtn.classList.remove('hidden');
+        capturePhotoBtn.classList.add('hidden');
+        switchCameraBtn.classList.add('hidden');
+        stopImageCamBtn.classList.add('hidden');
+        imagePostActions.classList.add('hidden');
+        imageVideo.classList.add('hidden');
+        capturedImage.classList.add('hidden');
+        captureCanvas.classList.add('hidden');
+        imageError.classList.add('hidden');
+      }
+
+      function showVideoCapture(sessionId) {
+        homePage.classList.add('hidden');
+        imageCapturePage.classList.add('hidden');
+        videoCapturePage.classList.remove('hidden');
+        currentMode = 'video';
+        currentSessionId = sessionId || generateSessionId();
+        videoSessionInfo.textContent = `Session: ${currentSessionId.slice(0, 13)}…`;
+        startVideoCamBtn.classList.remove('hidden');
+        startRecordingBtn.classList.add('hidden');
+        stopRecordingBtn.classList.add('hidden');
+        stopVideoCamBtn.classList.add('hidden');
+        videoPostActions.classList.add('hidden');
+        videoPreview.classList.add('hidden');
+        recordedPlayback.classList.add('hidden');
+        recordingIndicator.classList.add('hidden');
+        elapsedTimeEl.classList.add('hidden');
+        videoError.classList.add('hidden');
+      }
+
+      // ---------- Check URL parameters on load ----------
+      function initFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        const mode = params.get('mode');
+        const session = params.get('session');
+        if (mode === 'image') {
+          showImageCapture(session);
+        } else if (mode === 'video') {
+          showVideoCapture(session);
+        } else {
+          showHome();
+        }
+      }
+
+      // ---------- IMAGE CAPTURE LOGIC ----------
+      async function startImageCamera(facingMode = 'environment') {
+        stopImageStream();
+        imageError.classList.add('hidden');
+        try {
+          const constraints = {
+            video: { facingMode: facingMode },
+            audio: false
+          };
+          imageStream = await navigator.mediaDevices.getUserMedia(constraints);
+          imageVideo.srcObject = imageStream;
+          imageVideo.classList.remove('hidden');
+          capturedImage.classList.add('hidden');
+          startImageCamBtn.classList.add('hidden');
+          capturePhotoBtn.classList.remove('hidden');
+          switchCameraBtn.classList.remove('hidden');
+          stopImageCamBtn.classList.remove('hidden');
+          currentFacingMode = facingMode;
+        } catch (err) {
+          console.error(err);
+          let msg = 'Camera access denied or unavailable.';
+          if (err.name === 'NotAllowedError') msg = 'Permission denied. Please allow camera access in your browser settings.';
+          else if (err.name === 'NotFoundError') msg = 'No camera found on this device.';
+          else if (err.name === 'NotReadableError') msg = 'Camera is already in use by another app.';
+          imageError.textContent = msg;
+          imageError.classList.remove('hidden');
+          showToast(msg);
+        }
+      }
+
+      function capturePhoto() {
+        if (!imageStream) return;
+        const video = imageVideo;
+        const canvas = captureCanvas;
+        const width = video.videoWidth;
+        const height = video.videoHeight;
+        if (width === 0 || height === 0) return;
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(video, 0, 0, width, height);
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.95);
+        capturedImage.src = dataUrl;
+        capturedImage.classList.remove('hidden');
+        imageVideo.classList.add('hidden');
+        capturePhotoBtn.classList.add('hidden');
+        switchCameraBtn.classList.add('hidden');
+        imagePostActions.classList.remove('hidden');
+        // stop camera after capture to save resources
+        stopImageStream();
+        stopImageCamBtn.classList.add('hidden');
+      }
+
+      function retakePhoto() {
+        capturedImage.classList.add('hidden');
+        imagePostActions.classList.add('hidden');
+        startImageCamBtn.classList.remove('hidden');
+        imageVideo.classList.add('hidden');
+        // clear stored src
+        capturedImage.src = '';
+      }
+
+      function downloadPhoto() {
+        if (!capturedImage.src) return;
+        const a = document.createElement('a');
+        a.href = capturedImage.src;
+        a.download = `prince-capture-${Date.now()}.jpg`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast('Photo downloaded');
+      }
+
+      function deletePhoto() {
+        capturedImage.src = '';
+        capturedImage.classList.add('hidden');
+        imagePostActions.classList.add('hidden');
+        startImageCamBtn.classList.remove('hidden');
+        stopImageStream();
+        showToast('Photo deleted');
+      }
+
+      // ---------- VIDEO RECORDING LOGIC ----------
+      async function startVideoCamera() {
+        stopVideoStream();
+        videoError.classList.add('hidden
